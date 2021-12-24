@@ -1533,9 +1533,8 @@ static int wait_for_next_frame(RASPISTILL_STATE *state, int *frame)
          vcos_sleep(CAMERA_SETTLE_TIME);
       else
          vcos_sleep(30);
-      
-      int ex = raspicamcontrol_get_exposure_compensation(state->camera_component);
-      raspicamcontrol_set_exposure_compensation(state->camera_component,ex-3);
+
+      raspicamcontrol_set_exposure_compensation(state->camera_component,state->camera_parameters->exposureCompensation - *frame * 3);
 
       *frame+=1;
 
